@@ -9,6 +9,9 @@ import { useSelector } from "react-redux"
 import { State } from "../Global/Types/SliceTypes"
 import { Accordion, AccordionSummary, Typography, AccordionDetails, Button } from "@material-ui/core"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import firebase from 'gatsby-plugin-firebase';
+import { useDispatch } from 'react-redux';
+import { setLoggedIn } from "../Global/Slice/LogInSlice"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,9 +30,35 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const IndexPage = () => {
+
   const classes = useStyles();
   const islit = useSelector((state: State) => state.themes.value);
   const isLogged = useSelector((state: State) => state.LogIn.value);
+  const dispatch = useDispatch();
+
+  const onLogIn = () => {
+
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    auth
+      .signInWithPopup(provider)
+      .then((result: any) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+        dispatch(setLoggedIn())
+      }).catch((error: any) => {
+        console.log(error);;
+        alert("An error occured. Try again");
+      });
+  }
+
 
   const result: any = useStaticQuery(graphql`
   {
@@ -77,7 +106,7 @@ const IndexPage = () => {
       ))
       }
       {isLogged ? null : (
-        <Accordion style={{color: 'black', backgroundColor: 'white'}}>
+        <Accordion style={{ backgroundColor: islit ? '' : '#1d212d' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -89,7 +118,7 @@ const IndexPage = () => {
             <Typography style={{ color: 'red' }} variant="h5">
               Log in to view more.
             </Typography>
-            <Button variant="contained" color="secondary" style={{marginLeft: '1rem'}}>
+            <Button variant="contained" color="secondary" style={{ marginLeft: '1rem' }} onClick={onLogIn}>
               Log in
             </Button>
           </AccordionDetails>

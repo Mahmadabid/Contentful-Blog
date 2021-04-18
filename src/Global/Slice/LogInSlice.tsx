@@ -7,8 +7,8 @@ const LogInSlice = createSlice({
     name: "Authentication",
     initialState,
     reducers: {
-        setLoggedIn: (state, action) => {
-            state.value = action.payload
+        setLoggedIn: (state) => {
+            state.value?state.value = false:state.value = true
         },
     },
 });

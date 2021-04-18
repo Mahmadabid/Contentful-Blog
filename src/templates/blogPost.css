@@ -1,0 +1,22 @@
+.truncate {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+@media screen and (max-width: 1400px) and (min-width: 850px) {
+  .imagesBlog {
+    max-width: 600px !important;
+    max-height: 600px !important;
+    object-fit: cover !important;
+  }
+
+  .img-align {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+}

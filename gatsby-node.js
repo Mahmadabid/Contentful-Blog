@@ -1,6 +1,6 @@
 const path = require(`path`)
 
-exports.createPages = async ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   // Define a template for blog post
@@ -31,6 +31,14 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     `
   )
+
+  if (result.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      result.errors
+    )
+    return
+  }
 
   const posts = result.data.allContentfulBlogPost.edges
 

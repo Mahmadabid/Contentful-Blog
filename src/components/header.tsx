@@ -10,6 +10,7 @@ import { State } from '../Global/Types/SliceTypes';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import './header.css';
+import { LogIn } from "./login";
 
 const useStyles = makeStyles((_theme: Theme) =>
   createStyles({
@@ -44,11 +45,11 @@ const Header = ({ siteTitle }: HeaderProps) => {
 
   return (
     <div className={classes.root}>
-      <AppBar className={islit? 'day': 'dark'} position="static" >
+      <AppBar className={islit ? 'day' : 'dark'} position="static" >
         <Toolbar>
-          <Link to="https://github.com/Mahmedabid/Contentful-Blog" >
-            <GitHubIcon style={{ fontSize: '40px', color: 'white' }}/>
-          </Link>
+          <a href="https://github.com/Mahmedabid/Contentful-Blog" target="blank">
+            <GitHubIcon style={{ fontSize: '40px', color: 'white' }} />
+          </a>        
           <Typography variant="h1" className={classes.title}>
             <Link
               to="/"
@@ -60,7 +61,7 @@ const Header = ({ siteTitle }: HeaderProps) => {
               {siteTitle}
             </Link>
           </Typography>
-          <div className="g-signin2" data-onsuccess="onSignIn"></div>
+          <LogIn />
           <IconButton onClick={themeHandle} color="inherit" >
             {islit ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>

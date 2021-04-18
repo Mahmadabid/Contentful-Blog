@@ -44,12 +44,12 @@ module.exports = {
       resolve: "gatsby-plugin-firebase",
       options: {
         credentials: {
-          apiKey: process.env.API_KEY,
-          authDomain: process.env.AUTH_DOMAIN,
-          projectId: process.env.PROJECT_ID,
-          storageBucket: process.env.STORAGE_BUCKET,
-          messagingSenderId: process.env.MESSAGING_SENDER_ID,
-          appId: process.env.APP_ID
+          apiKey: "AIzaSyAue6tntchg5c8sUxZdneiRkFE3nh4rISU",
+          authDomain: "contentful-blog-5ffad.firebaseapp.com",
+          projectId: "contentful-blog-5ffad",
+          storageBucket: "contentful-blog-5ffad.appspot.com",
+          messagingSenderId: "858257695239",
+          appId: "1:858257695239:web:5d6ce28cb9398e114480a2"
         }
       },
     },

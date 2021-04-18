@@ -77,7 +77,7 @@ const IndexPage = () => {
       ))
       }
       {isLogged ? null : (
-        <Accordion>
+        <Accordion style={{color: 'black', backgroundColor: 'white'}}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"

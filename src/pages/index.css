@@ -1,0 +1,23 @@
+.root {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+    transition: all .8s ease-in !important;
+    transition: all .6s ease-out !important;
+}
+
+.root:hover {
+    -ms-transform: scale(1.01); /* IE 9 */
+    -webkit-transform: scale(1.01); /* Safari 3-8 */
+    transform: scale(1.01); 
+}
+
+.img {
+    width: 30%;
+    height: 30%;
+}
+
+.about {
+    margin-left: 1rem;
+}
+

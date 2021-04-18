@@ -46,9 +46,9 @@ const Header = ({ siteTitle }: HeaderProps) => {
     <div className={classes.root}>
       <AppBar className={islit? 'day': 'dark'} position="static" >
         <Toolbar>
-          <IconButton color="inherit">
-            <GitHubIcon style={{ fontSize: '40px' }} />
-          </IconButton>
+          <Link to="https://github.com/Mahmedabid/Contentful-Blog" >
+            <GitHubIcon style={{ fontSize: '40px' }} color="inherit"/>
+          </Link>
           <Typography variant="h1" className={classes.title}>
             <Link
               to="/"

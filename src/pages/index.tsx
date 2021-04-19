@@ -9,10 +9,9 @@ import { useSelector } from "react-redux"
 import { State } from "../Global/Types/SliceTypes"
 import { Accordion, AccordionSummary, Typography, AccordionDetails, Button } from "@material-ui/core"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import firebase from 'gatsby-plugin-firebase';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn } from "../Global/Slice/LogInSlice"
-import { auth } from "../Global/Firebase"
-import { provider } from "../Global/Firebase"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +37,9 @@ const IndexPage = () => {
   const dispatch = useDispatch();
 
   const onLogIn = () => {
+
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
 
     auth
       .signInWithPopup(provider)

@@ -10,9 +10,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import './blogPost.css'
 import { CardMedia } from '@material-ui/core';
 import { setLoggedIn } from "../Global/Slice/LogInSlice"
+import firebase from 'gatsby-plugin-firebase';
 import { Link } from 'gatsby';
-import { auth } from '../Global/Firebase';
-import { provider } from '../Global/Firebase';
 
 const useStyles = makeStyles({
     buttons: {
@@ -29,6 +28,9 @@ export default function ImgMediaCard(props: any) {
     const dispatch = useDispatch();
 
     const onLogIn = () => {
+
+        const auth = firebase.auth();
+        const provider = new firebase.auth.GoogleAuthProvider();
 
         auth
             .signInWithPopup(provider)

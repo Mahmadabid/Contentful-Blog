@@ -10,6 +10,9 @@ module.exports = {
     description: `Gatsby Contentful Blog`,
     author: `@ahmad`,
   },
+  resolve: {
+    mainFields: ['browser', 'module', 'main'],
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {

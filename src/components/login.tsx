@@ -6,12 +6,17 @@ import { setLoggedIn } from '../Global/Slice/LogInSlice';
 import { addUser } from '../Global/Slice/userSlice';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { auth, provider } from '../Global/Firebase';
+import getFirebase from '../Global/Firebase';
 // import firebase from 'gatsby-plugin-firebase';
 
 
 export const LogIn = () => {
+    const firebase = getFirebase();
 
+
+    const auth = firebase.auth();
+
+    const provider = new firebase.auth.GoogleAuthProvider();
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
     const picture = useSelector((state: State) => state.user.picture);
@@ -27,7 +32,7 @@ export const LogIn = () => {
     };
 
     const onLogIn = () => {
-        
+
         auth
             .signInWithPopup(provider)
             .then((_result: any) => {

@@ -10,9 +10,6 @@ module.exports = {
     description: `Gatsby Contentful Blog`,
     author: `@ahmad`,
   },
-  resolve: {
-    mainFields: ['browser', 'module', 'main'],
-  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
@@ -45,6 +42,9 @@ module.exports = {
     },
     {
       resolve: "gatsby-plugin-firebase",
+      resolve: {
+        mainFields: ['browser', 'module', 'main'],
+      },
       options: {
         credentials: {
           apiKey: process.env.API_KEY,

@@ -27,6 +27,10 @@ export const LogIn = () => {
         setAnchorEl(null);
     };
 
+    if (typeof window !== "undefined") {
+        // do your stuff if window is not undefined.... this way you wont get window is undefined at build
+       }
+
     const onLogIn = () => {
         auth
             .signInWithPopup(provider)

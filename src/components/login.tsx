@@ -27,24 +27,14 @@ export const LogIn = () => {
         setAnchorEl(null);
     };
 
-    const onLogIn = async () => {
-
-        await firebase
-        .auth()
+    const onLogIn = () => {
+        auth
             .signInWithPopup(provider)
-            .then((result: any) => {
+            .then((_result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */
-                var credential = result.credential;
-
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                var token = credential.accessToken;
-                // The signed-in user info.
-                var user = result.user;
-                // ...
                 dispatch(setLoggedIn())
             }).catch((error: any) => {
                 console.log(error);;
-                alert("An error occured. Try again");
             });
     }
 

@@ -6,9 +6,13 @@ import { setLoggedIn } from '../Global/Slice/LogInSlice';
 import { addUser } from '../Global/Slice/userSlice';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import firebase from 'gatsby-plugin-firebase';
+import getFirebase from '../Global/Firebase';
 
 export const LogIn = () => {
+
+    const fire = getFirebase();
+    var secondKey = Object.keys(fire)[0];
+    const firebase = fire[secondKey];
 
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
@@ -23,7 +27,6 @@ export const LogIn = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-console.log('asdasda',firebase);
 
     React.useEffect(() => {
         if (!firebase) return;
@@ -37,8 +40,6 @@ console.log('asdasda',firebase);
     }, [firebase])
     
     const onLogIn = () => {
-        console.log(123123,firebase);
-        
         const provider = new firebase.auth.GoogleAuthProvider();
 
         firebase.auth()

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Avatar, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../Global/Types/SliceTypes';
@@ -11,12 +11,7 @@ import getFirebase from '../Global/Firebase';
 
 
 export const LogIn = () => {
-    const firebase = getFirebase();
-
-
-    const auth = firebase.auth();
-
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const firebase= getFirebase();
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
     const picture = useSelector((state: State) => state.user.picture);
@@ -31,10 +26,21 @@ export const LogIn = () => {
         setAnchorEl(null);
     };
 
-    const onLogIn = () => {
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(function (user: any) {
+            if (user) {
+                dispatch(addUser({ name: user.displayName, picture: user.photoURL }))
+            } else {
+                console.log("err");
+            }
+        });
+    
+    }, [firebase])
 
-        auth
-            .signInWithPopup(provider)
+    const onLogIn = () => {
+        
+        firebase.auth()
+            .signInWithPopup(new firebase.auth.GoogleAuthProvider())
             .then((_result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */
                 dispatch(setLoggedIn())
@@ -44,7 +50,7 @@ export const LogIn = () => {
     }
 
     const onLogout = () => {
-        auth.signOut().then(function () {
+        firebase.auth().signOut().then(function () {
             alert("You are logged out");
             dispatch(setLoggedIn())
         }).catch(function (error: any) {
@@ -53,14 +59,6 @@ export const LogIn = () => {
 
         handleClose();
     }
-
-    auth.onAuthStateChanged(function (user: any) {
-        if (user) {
-            dispatch(addUser({ name: user.displayName, picture: user.photoURL }))
-        } else {
-            console.log("err");
-        }
-    });
 
     return (
         <div>

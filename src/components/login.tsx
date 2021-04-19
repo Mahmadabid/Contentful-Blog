@@ -27,8 +27,10 @@ export const LogIn = () => {
         setAnchorEl(null);
     };
 
-    const onLogIn = () => {
-        auth
+    const onLogIn = async () => {
+
+        await firebase
+        .auth()
             .signInWithPopup(provider)
             .then((_result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */

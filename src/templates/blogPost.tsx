@@ -27,12 +27,12 @@ export default function ImgMediaCard(props: any) {
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
 
-    const onLogIn = () => {
+    const onLogIn = async () => {
 
-        const auth = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
 
-        auth
+        await firebase
+        .auth()
         .signInWithPopup(provider)
         .then((_result: any) => {
             /** @type {firebase.auth.OAuthCredential} */

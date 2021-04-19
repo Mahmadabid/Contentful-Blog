@@ -7,11 +7,13 @@ import { addUser } from '../Global/Slice/userSlice';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import getFirebase from '../Global/Firebase';
+import firebase from '@firebase/app';
 
 // import firebase from 'gatsby-plugin-firebase';
 
 export const LogIn = () => {
     const firebase=getFirebase()
+
     const provider = new firebase.auth.GoogleAuthProvider();
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
@@ -41,17 +43,17 @@ export const LogIn = () => {
     }
 
     const onLogout = () => {
-        auth.signOut().then(function () {
+        firebase.auth().signOut().then(function () {
             alert("You are logged out");
             dispatch(setLoggedIn())
-        }).catch(function (error) {
+        }).catch(function (error: any) {
             console.log(error)
         })
 
         handleClose();
     }
 
-    auth.onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(function (user: any) {
         if (user) {
             dispatch(addUser({ name: user.displayName, picture: user.photoURL }))
         } else {

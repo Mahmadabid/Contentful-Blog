@@ -1,8 +1,9 @@
-import firebase from 'firebase';
+import firebase from '@firebase/app';
+import '@firebase/auth';
+import '@firebase/firestore';
+import '@firebase/functions';
 
-const fetch = require('node-fetch');
-
-const firebaseConfig = {
+const config = {
     apiKey: "AIzaSyAue6tntchg5c8sUxZdneiRkFE3nh4rISU",
     authDomain: "contentful-blog-5ffad.firebaseapp.com",
     projectId: "contentful-blog-5ffad",
@@ -11,8 +12,15 @@ const firebaseConfig = {
     appId: "1:858257695239:web:5d6ce28cb9398e114480a2"
   };
 
-  firebase.initializeApp(firebaseConfig);
 
-export const auth = firebase.auth();
+  let instance: any;
 
-export const provider = new firebase.auth.GoogleAuthProvider();
+  export default function getFirebase() {
+    if (typeof window !== 'undefined') {
+      if (instance) return instance;
+      instance = firebase.initializeApp(config);
+      return instance;
+    }
+  
+    return null;
+  }

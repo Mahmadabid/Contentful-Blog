@@ -35,7 +35,8 @@ export const LogIn = () => {
             }
         });
 
-    }, [firebase])
+    }, [])
+
     console.log(firebase);
     let provider = new firebase.auth.GoogleAuthProvider();
     const onLogIn = () => {

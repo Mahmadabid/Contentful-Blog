@@ -36,23 +36,11 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        spaceId: "u7id2mxp6ugn",
+        accessToken: "jomI-0jc7Rvw8PnT2PkyKuhXI6UaboXuL93ezMc1sKM",
       },
     },
-    {
-      resolve: "gatsby-plugin-firebase",
-      options: {
-        credentials: {
-          apiKey: process.env.GATSBY_API_KEY,
-          authDomain: process.env.GATSBY_AUTH_DOMAIN,
-          projectId: process.env.GATSBY_PROJECT_ID,
-          storageBucket: process.env.GATSBY_STORAGE_BUCKET,
-          messagingSenderId: process.env.GATSBY_MESSAGING_SENDER_ID,
-          appId: process.env.GATSBY_APP_ID
-        }
-      },
-    },
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

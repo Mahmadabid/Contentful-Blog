@@ -42,9 +42,7 @@ module.exports = {
     },
     {
       resolve: "gatsby-plugin-firebase",
-      resolve: {
-        mainFields: ['browser', 'module', 'main'],
-      },
+      mainFields: ['browser', 'module', 'main'],
       options: {
         credentials: {
           apiKey: process.env.API_KEY,

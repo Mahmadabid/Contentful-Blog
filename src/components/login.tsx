@@ -39,7 +39,7 @@ export const LogIn = () => {
 console.log(firebase);
     const onLogIn = () => {
         console.log(firebase);
-        firebase.auth()
+        e.firebase.auth()
             .signInWithPopup(new firebase.auth.GoogleAuthProvider())
             .then((_result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */

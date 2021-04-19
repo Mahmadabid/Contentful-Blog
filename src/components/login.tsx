@@ -16,10 +16,10 @@ export const LogIn = () => {
     console.log(123231, firebased);
 
     let auth = firebase.auth();
-    let provider = new firebase.auth.GoogleAuthProvider();
+    let provider = new firebase.auth().GoogleAuthProvider();
     if (firebased) {
     auth = firebased.auth();
-    provider = new firebased.auth.GoogleAuthProvider();
+    provider = new firebased.auth().GoogleAuthProvider();
     }
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();

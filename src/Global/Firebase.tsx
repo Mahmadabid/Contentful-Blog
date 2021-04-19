@@ -13,7 +13,7 @@ const config = {
 
   let instance: any;
 
-function getFirebase() {
+export default function getFirebase() {
 if (typeof window !== 'undefined') {
 if (instance) return instance;
 instance = firebase.initializeApp(config);
@@ -23,4 +23,3 @@ return instance;
 return null;
 }
  
-export const firebased = getFirebase();

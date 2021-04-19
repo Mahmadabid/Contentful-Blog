@@ -6,21 +6,16 @@ import { setLoggedIn } from '../Global/Slice/LogInSlice';
 import { addUser } from '../Global/Slice/userSlice';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import firebase from 'gatsby-plugin-firebase';
-import { firebased } from '../Global/Firebase';
+import getFirebase from '../Global/Firebase';
 
 
 export const LogIn = () => {
 
-    console.log(firebase)
-    console.log(123231, firebased);
+    const fire = getFirebase();
+    var secondKey = Object.keys(fire)[0];
 
-    let auth = firebase.auth();
-    let provider: any = new firebase.auth().GoogleAuthProvider();
-    if (firebased) {
-    auth = firebased.auth();
-    provider = new firebased.auth().GoogleAuthProvider();
-    }
+    const firebase = fire[secondKey];
+
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
     const picture = useSelector((state: State) => state.user.picture);
@@ -35,18 +30,25 @@ export const LogIn = () => {
         setAnchorEl(null);
     };
 
+    React.useEffect(() => {
+        if (!firebase) return;
+        firebase.auth().onAuthStateChanged(function (user: any) {
+            if (user) {
+                dispatch(addUser({ name: user.displayName, picture: user.photoURL }))
+            } else {
+                console.log("err");
+            }
+        });
+    }, [firebase])
+    
     const onLogIn = () => {
-        auth
-            .signInWithPopup(provider)
-            .then((result: any) => {
-                /** @type {firebase.auth.OAuthCredential} */
-                var credential = result.credential;
+        const provider = new firebase.auth.GoogleAuthProvider();
 
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                var token = credential.accessToken;
-                // The signed-in user info.
-                var user = result.user;
-                // ...
+        firebase.auth()
+            .signInWithPopup(provider)
+            .then((_result: any) => {
+                /** @type {firebase.auth.OAuthCredential} */
+
                 dispatch(setLoggedIn())
             }).catch((error: any) => {
                 console.log(error);;
@@ -54,23 +56,15 @@ export const LogIn = () => {
     }
 
     const onLogout = () => {
-        auth.signOut().then(function () {
+        firebase.auth().signOut().then(function () {
             alert("You are logged out");
             dispatch(setLoggedIn())
-        }).catch(function (error) {
+        }).catch(function (error: any) {
             console.log(error)
         })
 
         handleClose();
     }
-
-    // auth.onAuthStateChanged(function (user) {
-    //     if (user) {
-    //         dispatch(addUser({ name: user.displayName, picture: user.photoURL }))
-    //     } else {
-    //         console.log("err");
-    //     }
-    // });
 
     return (
         <div>

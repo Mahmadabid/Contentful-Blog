@@ -10,8 +10,9 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import './blogPost.css'
 import { CardMedia } from '@material-ui/core';
 import { setLoggedIn } from "../Global/Slice/LogInSlice"
-import firebase from 'gatsby-plugin-firebase';
+// import firebase from 'gatsby-plugin-firebase';
 import { Link } from 'gatsby';
+import getFirebase from '../Global/Firebase';
 
 const useStyles = makeStyles({
     buttons: {
@@ -22,32 +23,27 @@ const useStyles = makeStyles({
 });
 
 export default function ImgMediaCard(props: any) {
+    const fire = getFirebase();
+    var secondKey = Object.keys(fire)[0];
+
+    const firebase = fire[secondKey];
     const classes = useStyles();
     const info = props.pageContext.data
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
 
     const onLogIn = () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
 
-        // const auth = firebase.auth();
-        // const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth()
+            .signInWithPopup(provider)
+            .then((_result: any) => {
+                /** @type {firebase.auth.OAuthCredential} */
 
-        // auth
-        //     .signInWithPopup(provider)
-        //     .then((result: any) => {
-        //         /** @type {firebase.auth.OAuthCredential} */
-        //         var credential = result.credential;
-
-        //         // This gives you a Google Access Token. You can use it to access the Google API.
-        //         var token = credential.accessToken;
-        //         // The signed-in user info.
-        //         var user = result.user;
-        //         // ...
-        //         dispatch(setLoggedIn())
-        //     }).catch((error: any) => {
-        //         console.log(error);;
-        //         alert("An error occured. Try again");
-        //     });
+                dispatch(setLoggedIn())
+            }).catch((error: any) => {
+                console.log(error);;
+            });
     }
 
     return (

@@ -9,7 +9,7 @@ import { useSelector } from "react-redux"
 import { State } from "../Global/Types/SliceTypes"
 import { Accordion, AccordionSummary, Typography, AccordionDetails, Button } from "@material-ui/core"
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import firebase from 'gatsby-plugin-firebase';
+import firebase from 'gatsby-plugin-firebase';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn } from "../Global/Slice/LogInSlice"
 
@@ -37,18 +37,26 @@ const IndexPage = () => {
   const dispatch = useDispatch();
 
   const onLogIn = () => {
-    // require('firebase/auth')
+
     // const auth = firebase.auth();
     // const provider = new firebase.auth.GoogleAuthProvider();
 
     // auth
-    // .signInWithPopup(provider)
-    // .then((_result: any) => {
+    //   .signInWithPopup(provider)
+    //   .then((result: any) => {
     //     /** @type {firebase.auth.OAuthCredential} */
+    //     var credential = result.credential;
+
+    //     // This gives you a Google Access Token. You can use it to access the Google API.
+    //     var token = credential.accessToken;
+    //     // The signed-in user info.
+    //     var user = result.user;
+    //     // ...
     //     dispatch(setLoggedIn())
-    // }).catch((error: any) => {
+    //   }).catch((error: any) => {
     //     console.log(error);;
-    // });
+    //     alert("An error occured. Try again");
+    //   });
   }
 
 

@@ -10,7 +10,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import './blogPost.css'
 import { CardMedia } from '@material-ui/core';
 import { setLoggedIn } from "../Global/Slice/LogInSlice"
-// import firebase from 'gatsby-plugin-firebase';
+import firebase from 'gatsby-plugin-firebase';
 import { Link } from 'gatsby';
 
 const useStyles = makeStyles({
@@ -28,18 +28,26 @@ export default function ImgMediaCard(props: any) {
     const dispatch = useDispatch();
 
     const onLogIn = () => {
-        // require('firebase/auth')
+
         // const auth = firebase.auth();
         // const provider = new firebase.auth.GoogleAuthProvider();
 
         // auth
-        // .signInWithPopup(provider)
-        // .then((_result: any) => {
-        //     /** @type {firebase.auth.OAuthCredential} */
-        //     dispatch(setLoggedIn())
-        // }).catch((error: any) => {
-        //     console.log(error);;
-        // });
+        //     .signInWithPopup(provider)
+        //     .then((result: any) => {
+        //         /** @type {firebase.auth.OAuthCredential} */
+        //         var credential = result.credential;
+
+        //         // This gives you a Google Access Token. You can use it to access the Google API.
+        //         var token = credential.accessToken;
+        //         // The signed-in user info.
+        //         var user = result.user;
+        //         // ...
+        //         dispatch(setLoggedIn())
+        //     }).catch((error: any) => {
+        //         console.log(error);;
+        //         alert("An error occured. Try again");
+        //     });
     }
 
     return (

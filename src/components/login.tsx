@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Avatar, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import { State } from '../Global/Types/SliceTypes';
@@ -6,12 +6,21 @@ import { setLoggedIn } from '../Global/Slice/LogInSlice';
 import { addUser } from '../Global/Slice/userSlice';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import firebase from '../Global/Firebase';
-// import firebase from 'gatsby-plugin-firebase';
+import firebase from 'gatsby-plugin-firebase';
+import { firebased } from '../Global/Firebase';
 
 
 export const LogIn = () => {
-    
+
+    console.log(firebase)
+    console.log(123231, firebased);
+
+    let auth = firebase.auth();
+    let provider = new firebase.auth.GoogleAuthProvider();
+    if (firebased) {
+    auth = firebased.auth();
+    provider = new firebased.auth.GoogleAuthProvider();
+    }
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
     const picture = useSelector((state: State) => state.user.picture);
@@ -27,8 +36,7 @@ export const LogIn = () => {
     };
 
     const onLogIn = () => {
-        let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth()
+        auth
             .signInWithPopup(provider)
             .then((result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */
@@ -41,21 +49,28 @@ export const LogIn = () => {
                 // ...
                 dispatch(setLoggedIn())
             }).catch((error: any) => {
-                console.log(error);
-                
+                console.log(error);;
             });
     }
 
     const onLogout = () => {
-        firebase.auth().signOut().then(function () {
+        auth.signOut().then(function () {
             alert("You are logged out");
             dispatch(setLoggedIn())
-        }).catch(function (error: any) {
+        }).catch(function (error) {
             console.log(error)
         })
 
         handleClose();
     }
+
+    // auth.onAuthStateChanged(function (user) {
+    //     if (user) {
+    //         dispatch(addUser({ name: user.displayName, picture: user.photoURL }))
+    //     } else {
+    //         console.log("err");
+    //     }
+    // });
 
     return (
         <div>

@@ -27,8 +27,10 @@ export const LogIn = () => {
         setAnchorEl(null);
     };
 
-    const onLogIn = () => {
-        auth
+    const onLogIn = async () => {
+
+        await firebase
+        .auth()
             .signInWithPopup(provider)
             .then((result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */
@@ -42,6 +44,7 @@ export const LogIn = () => {
                 dispatch(setLoggedIn())
             }).catch((error: any) => {
                 console.log(error);;
+                alert("An error occured. Try again");
             });
     }
 

@@ -36,28 +36,28 @@ const IndexPage = () => {
   const isLogged = useSelector((state: State) => state.LogIn.value);
   const dispatch = useDispatch();
 
-  const onLogIn = () => {
+  const onLogIn = async () => {
 
-    const auth = firebase.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
 
-    auth
-      .signInWithPopup(provider)
-      .then((result: any) => {
-        /** @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
+    await firebase
+    .auth()
+        .signInWithPopup(provider)
+        .then((result: any) => {
+            /** @type {firebase.auth.OAuthCredential} */
+            var credential = result.credential;
 
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        // ...
-        dispatch(setLoggedIn())
-      }).catch((error: any) => {
-        console.log(error);;
-        alert("An error occured. Try again");
-      });
-  }
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            // ...
+            dispatch(setLoggedIn())
+        }).catch((error: any) => {
+            console.log(error);;
+            alert("An error occured. Try again");
+        });
+}
 
 
   const result: any = useStaticQuery(graphql`

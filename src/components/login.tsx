@@ -37,10 +37,10 @@ export const LogIn = () => {
 
     }, [])
 
-    console.log(firebase);
-    let provider = new firebase.auth.GoogleAuthProvider();
+
     const onLogIn = () => {
         console.log(firebase);
+        let provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth()
             .signInWithPopup(provider)
             .then((result: any) => {

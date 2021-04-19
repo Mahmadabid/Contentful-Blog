@@ -16,7 +16,7 @@ export const LogIn = () => {
     console.log(123231, firebased);
 
     let auth = firebase.auth();
-    let provider = new firebase.auth().GoogleAuthProvider();
+    let provider: any = new firebase.auth().GoogleAuthProvider();
     if (firebased) {
     auth = firebased.auth();
     provider = new firebased.auth().GoogleAuthProvider();

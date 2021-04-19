@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import store from './src/Global/store';
 import { Theme } from "./src/Global/theme";
 import "firebase/auth";
-import "node-fetch";
 
 export const wrapRootElement = ({ element }) => {
   

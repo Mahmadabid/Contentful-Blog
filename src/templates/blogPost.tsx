@@ -10,7 +10,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import './blogPost.css'
 import { CardMedia } from '@material-ui/core';
 import { setLoggedIn } from "../Global/Slice/LogInSlice"
-import firebase from 'gatsby-plugin-firebase';
+// import firebase from 'gatsby-plugin-firebase';
 import { Link } from 'gatsby';
 
 const useStyles = makeStyles({
@@ -28,18 +28,18 @@ export default function ImgMediaCard(props: any) {
     const dispatch = useDispatch();
 
     const onLogIn = () => {
-        require('firebase/auth')
-        const auth = firebase.auth();
-        const provider = new firebase.auth.GoogleAuthProvider();
+        // require('firebase/auth')
+        // const auth = firebase.auth();
+        // const provider = new firebase.auth.GoogleAuthProvider();
 
-        auth
-        .signInWithPopup(provider)
-        .then((_result: any) => {
-            /** @type {firebase.auth.OAuthCredential} */
-            dispatch(setLoggedIn())
-        }).catch((error: any) => {
-            console.log(error);;
-        });
+        // auth
+        // .signInWithPopup(provider)
+        // .then((_result: any) => {
+        //     /** @type {firebase.auth.OAuthCredential} */
+        //     dispatch(setLoggedIn())
+        // }).catch((error: any) => {
+        //     console.log(error);;
+        // });
     }
 
     return (

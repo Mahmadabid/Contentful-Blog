@@ -1,24 +1,5 @@
 const path = require(`path`)
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === "build-html" || stage === "develop-html") {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /firebase/,
-            use: loaders.null(),
-          },
-          {
-            test: /bad-module/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    })
-  }
-}
-
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 

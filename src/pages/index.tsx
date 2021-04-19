@@ -11,6 +11,7 @@ import { Accordion, AccordionSummary, Typography, AccordionDetails, Button } fro
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn } from "../Global/Slice/LogInSlice"
+import firebase from 'gatsby-plugin-firebase';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,8 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const IndexPage = () => {
-  
- 
+
+
 
   const classes = useStyles();
   const islit = useSelector((state: State) => state.themes.value);
@@ -38,8 +39,19 @@ const IndexPage = () => {
   const dispatch = useDispatch();
 
   const onLogIn = () => {
-    
-}
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth()
+      .signInWithPopup(provider)
+      .then((_result: any) => {
+        /** @type {firebase.auth.OAuthCredential} */
+
+        dispatch(setLoggedIn())
+      }).catch((error: any) => {
+        console.log(error);;
+      });
+  }
 
 
   const result: any = useStaticQuery(graphql`

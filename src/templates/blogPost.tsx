@@ -11,6 +11,7 @@ import './blogPost.css'
 import { CardMedia } from '@material-ui/core';
 import { setLoggedIn } from "../Global/Slice/LogInSlice"
 import { Link } from 'gatsby';
+import firebase from 'gatsby-plugin-firebase';
 
 const useStyles = makeStyles({
     buttons: {
@@ -21,14 +22,25 @@ const useStyles = makeStyles({
 });
 
 export default function ImgMediaCard(props: any) {
- 
+
     const classes = useStyles();
     const info = props.pageContext.data
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
 
     const onLogIn = () => {
-       
+
+        const provider = new firebase.auth.GoogleAuthProvider();
+
+        firebase.auth()
+            .signInWithPopup(provider)
+            .then((_result: any) => {
+                /** @type {firebase.auth.OAuthCredential} */
+
+                dispatch(setLoggedIn())
+            }).catch((error: any) => {
+                console.log(error);;
+            });
     }
 
     return (

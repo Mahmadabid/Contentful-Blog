@@ -23,7 +23,6 @@ export const LogIn = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-console.log('asdasda',firebase);
 
     React.useEffect(() => {
         if (!firebase) return;
@@ -35,10 +34,9 @@ console.log('asdasda',firebase);
             }
         });
     }, [firebase])
-    
+
     const onLogIn = () => {
-        console.log(123123,firebase);
-        
+
         const provider = new firebase.auth.GoogleAuthProvider();
 
         firebase.auth()

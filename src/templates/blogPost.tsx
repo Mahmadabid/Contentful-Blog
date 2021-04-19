@@ -38,6 +38,11 @@ export default function ImgMediaCard(props: any) {
                 /** @type {firebase.auth.OAuthCredential} */
                 var credential = result.credential;
 
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
                 dispatch(setLoggedIn())
             }).catch((error: any) => {
                 console.log(error);;

@@ -36,7 +36,7 @@ export const LogIn = () => {
         });
     
     }, [firebase])
-
+console.log(firebase);
     const onLogIn = () => {
         
         firebase.auth()

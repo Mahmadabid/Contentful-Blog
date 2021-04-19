@@ -11,7 +11,7 @@ import getFirebase from '../Global/Firebase';
 
 
 export const LogIn = () => {
-    const firebase= getFirebase();
+    const firebase = getFirebase();
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
     const picture = useSelector((state: State) => state.user.picture);
@@ -34,19 +34,33 @@ export const LogIn = () => {
                 console.log("err");
             }
         });
-    
+
     }, [firebase])
-console.log(firebase);
-let provider = new firebase.auth.GoogleAuthProvider();
+    console.log(firebase);
+    let provider = new firebase.auth.GoogleAuthProvider();
     const onLogIn = () => {
         console.log(firebase);
         firebase.auth()
             .signInWithPopup(provider)
-            .then((_result: any) => {
+            .then((result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */
+                var credential = result.credential;
+
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
                 dispatch(setLoggedIn())
             }).catch((error: any) => {
-                console.log(error);;
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
             });
     }
 

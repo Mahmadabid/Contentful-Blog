@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { State } from "./Types/SliceTypes";
-import * as React from "react";
+import React from "react";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 interface ThemeProps {

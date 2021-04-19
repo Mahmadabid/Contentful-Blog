@@ -11,8 +11,8 @@ import getFirebase from '../Global/Firebase';
 // import firebase from 'gatsby-plugin-firebase';
 
 export const LogIn = () => {
-
-    const provider = new getFirebase().auth.GoogleAuthProvider();
+    const firebase=getFirebase()
+    const provider = new firebase.auth.GoogleAuthProvider();
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();
     const picture = useSelector((state: State) => state.user.picture);
@@ -29,7 +29,7 @@ export const LogIn = () => {
 
     const onLogIn = () => {
         
-        getFirebase()
+        firebase
         .auth()
             .signInWithPopup(provider)
             .then((_result: any) => {

@@ -6,12 +6,10 @@ import { setLoggedIn } from '../Global/Slice/LogInSlice';
 import { addUser } from '../Global/Slice/userSlice';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import firebase from 'gatsby-plugin-firebase';
+import { auth } from '../Global/Firebase';
+import { provider } from '../Global/Firebase';
 
 export const LogIn = () => {
-
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
 
     const isLogged = useSelector((state: State) => state.LogIn.value);
     const dispatch = useDispatch();

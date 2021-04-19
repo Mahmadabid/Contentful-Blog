@@ -39,8 +39,8 @@ export const LogIn = () => {
 console.log(firebase);
     const onLogIn = () => {
         console.log(firebase);
-        e.firebase.auth()
-            .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+        firebase.auth()
+            .signInWithPopup(firebase.auth.GoogleAuthProvider())
             .then((_result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */
                 dispatch(setLoggedIn())

@@ -27,6 +27,8 @@ export const LogIn = () => {
     };
 
     useEffect(() => {
+        if (!firebase) return;
+
         firebase.auth().onAuthStateChanged(function (user: any) {
             if (user) {
                 dispatch(addUser({ name: user.displayName, picture: user.photoURL }))
@@ -35,12 +37,12 @@ export const LogIn = () => {
             }
         });
 
-    }, [])
+    }, [firebase])
 
 
     const onLogIn = () => {
-        console.log(firebase);
-        let provider = new firebase.auth.GoogleAuthProvider();
+        console.log(firebase.firebase);
+        let provider = new firebase.firebase.auth.GoogleAuthProvider();
         firebase.auth()
             .signInWithPopup(provider)
             .then((result: any) => {

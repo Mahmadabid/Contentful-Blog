@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import firebase from 'gatsby-plugin-firebase';
 
 export const LogIn = () => {
-
+    require('firebase/auth')
     const auth = firebase.auth();
     const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -27,10 +27,9 @@ export const LogIn = () => {
         setAnchorEl(null);
     };
 
-    const onLogIn = async () => {
-
-        await firebase
-        .auth()
+    const onLogIn = () => {
+        
+        auth
             .signInWithPopup(provider)
             .then((_result: any) => {
                 /** @type {firebase.auth.OAuthCredential} */

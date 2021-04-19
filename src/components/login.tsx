@@ -42,14 +42,14 @@ export const LogIn = () => {
         auth.signOut().then(function () {
             alert("You are logged out");
             dispatch(setLoggedIn())
-        }).catch(function (error) {
+        }).catch(function (error: any) {
             console.log(error)
         })
 
         handleClose();
     }
 
-    auth.onAuthStateChanged(function (user) {
+    auth.onAuthStateChanged(function (user: any) {
         if (user) {
             dispatch(addUser({ name: user.displayName, picture: user.photoURL }))
         } else {

@@ -1,7 +1,5 @@
 import firebase from 'firebase';
 
-const fetch = require('node-fetch');
-
 const firebaseConfig = {
     apiKey: "AIzaSyAue6tntchg5c8sUxZdneiRkFE3nh4rISU",
     authDomain: "contentful-blog-5ffad.firebaseapp.com",
@@ -13,6 +11,7 @@ const firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
 
+  
 export const auth = firebase.auth();
 
 export const provider = new firebase.auth.GoogleAuthProvider();
